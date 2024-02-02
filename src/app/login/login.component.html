@@ -1,0 +1,14 @@
+<form (ngSubmit)="onLogin()" #loginForm="ngForm">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" [(ngModel)]="username" required>
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password" required>
+  </div>
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+  <button type="submit" [disabled]="!loginForm.valid">Login</button>
+</form>

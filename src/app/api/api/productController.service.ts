@@ -13,7 +13,7 @@
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
+         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext
         }       from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
@@ -127,16 +127,7 @@ export class ProductControllerService {
         }
 
 
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
+        let responseType_ = 'json';
 
         let localVarPath = `/product`;
         return this.httpClient.request<Array<Product>>('get', `${this.configuration.basePath}${localVarPath}`,
