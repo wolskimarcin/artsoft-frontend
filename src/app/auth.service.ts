@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {AuthenticationControllerService} from "./api";
+import {AuthenticationControllerService} from "./api/services/authentication-controller.service";
+import {LoginBody} from "./api/models/login-body";
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,12 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.authControllerService.loginUser({username, password}, 'body').pipe(
+    const loginBody: LoginBody = {
+      username: username,
+      password: password
+    };
+
+    return this.authControllerService.loginUser({ body: loginBody }).pipe(
       map(response => {
         if (response.jwt) {
           localStorage.setItem('jwtToken', response.jwt);
