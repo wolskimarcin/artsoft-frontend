@@ -37,3 +37,40 @@
 .out-of-stock {
   color: red;
 }
+
+.pagination-controls {
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 16px;
+}
+
+.pagination-controls button {
+  border: 2px solid #272323;
+  background-color: #272323;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  border-radius: 4px;
+  outline: none;
+  margin: 0 6px;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pagination-controls span {
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #f0f0f0;
+  border: 1px solid #dcdcdc;
+  color: #333;
+  border-radius: 5px;
+}
+
+.pagination-controls i.material-icons {
+  font-size: 24px;
+  vertical-align: middle;
+}

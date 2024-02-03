@@ -1,7 +1,15 @@
 <div class="pagination-controls">
-  <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
+  <button
+    (click)="goToPage(currentPage - 1)"
+    [disabled]="currentPage === 0">
+    <i class="material-icons">arrow_left</i>
+  </button>
   <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
-  <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages - 1">Next</button>
+  <button
+    (click)="goToPage(currentPage + 1)"
+    [disabled]="currentPage === totalPages - 1">
+    <i class="material-icons">arrow_right</i>
+  </button>
 </div>
 
 <div class="products-grid">
