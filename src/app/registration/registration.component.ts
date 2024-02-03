@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
       this.authService.registerUser(this.registrationForm.value).subscribe({
         next: (response) => {
           console.log('Registration successful', response);
-          this.registrationSuccess = true; // Set this to true on success
+          this.registrationSuccess = true;
           this.registrationMessage =
             `Almost there! 🌟 We've sent an email to ${this.userEmail} with a link to activate your account.
               Please check your inbox (and spam folder, just in case) to complete your registration.

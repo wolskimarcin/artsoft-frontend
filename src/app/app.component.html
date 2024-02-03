@@ -1,11 +1,32 @@
 <header>
   <nav>
-    <a routerLink="/">Home</a>
-    <a routerLink="/products">Products</a>
-    <a routerLink="/login" *ngIf="(authService.isLoggedIn() | async) === false">Login</a>
-    <a routerLink="/register" *ngIf="(authService.isLoggedIn() | async) === false">Register</a>
-    <a *ngIf="(authService.isLoggedIn() | async) === true" (click)="authService.logout()">Logout</a>
+    <div class="auth-links">
+      <a routerLink="/login" *ngIf="(authService.isLoggedIn() | async) === false">Login</a>
+      <a routerLink="/register" *ngIf="(authService.isLoggedIn() | async) === false">Register</a>
+      <a *ngIf="(authService.isLoggedIn() | async) === true" (click)="authService.logout()">Logout</a>
+    </div>
   </nav>
+  <mat-toolbar class="top-mat-toolbar">
+    <a mat-button routerLink="/">Home</a>
+    <a mat-button routerLink="/products">Products</a>
+
+    <span class="flex-spacer"></span>
+
+    <div class="custom-search-bar">
+      <input class="search-input" type="text" placeholder="Search">
+      <div class="search-button">
+        <i class="material-icons">search</i>
+      </div>
+    </div>
+
+    <span class="flex-spacer"></span>
+
+    <div class="shopping-cart">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>{{ itemCount }}</span> /
+      <span>${{ totalPrice.toFixed(2) }}</span>
+    </div>
+  </mat-toolbar>
 </header>
 
 <main>
