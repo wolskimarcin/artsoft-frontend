@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RegistrationComponent} from './registration/registration.component';
 import {JwtInterceptor} from "./interceptors/jwt-interceptor.service";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {JwtInterceptor} from "./interceptors/jwt-interceptor.service";
     LoginComponent,
     ProductsComponent,
     UserProfileComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
