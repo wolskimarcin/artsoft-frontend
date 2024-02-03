@@ -34,12 +34,7 @@ export class AuthService {
     );
   }
 
-  login(username: string, password: string): Observable<any> {
-    const loginBody: LoginBody = {
-      username: username,
-      password: password
-    };
-
+  login(loginBody: LoginBody): Observable<any> {
     return this.authControllerService.loginUser({ body: loginBody }).pipe(
       map(response => {
         if (response.jwt) {
@@ -50,7 +45,7 @@ export class AuthService {
       }),
       catchError(error => {
         console.error('Login error:', error);
-        return of(null);
+        return error;
       })
     );
   }

@@ -18,7 +18,7 @@ export class LoginComponent {
 
   onLogin(): void {
     const loginData: LoginBody = {username: this.username, password: this.password};
-    this.authService.login(loginData.username, loginData.password).subscribe({
+    this.authService.login(loginData).subscribe({
       next: (response: any) => {
         this.router.navigate(['/products'])
       },

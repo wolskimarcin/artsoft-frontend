@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationControllerService} from "../api/services/authentication-controller.service";
+import {RegistrationBody} from "../api/models/registration-body";
 
 @Component({
   selector: 'app-registration',
@@ -32,7 +33,7 @@ export class RegistrationComponent implements OnInit {
   register(): void {
     if (this.registrationForm.valid) {
       this.userEmail = this.registrationForm.value.email;
-      this.authService.registerUser(this.registrationForm.value).subscribe({
+      this.authService.registerUser({ body: this.registrationForm.value as RegistrationBody }).subscribe({
         next: (response) => {
           console.log('Registration successful', response);
           this.registrationSuccess = true;
