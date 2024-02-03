@@ -13,8 +13,12 @@
     <span class="flex-spacer"></span>
 
     <div class="custom-search-bar">
-      <input class="search-input" type="text" placeholder="Search">
-      <div class="search-button">
+      <input class="search-input"
+             type="text"
+             [(ngModel)]="searchTerm"
+             (keyup.enter)="executeSearch()"
+             placeholder="Search">
+      <div class="search-button" (click)="executeSearch()">
         <i class="material-icons">search</i>
       </div>
     </div>
