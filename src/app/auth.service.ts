@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 import {AuthenticationControllerService} from "./api";
 
 @Injectable({
@@ -13,22 +13,6 @@ export class AuthService {
 
   constructor(private authControllerService: AuthenticationControllerService, private http: HttpClient) {
     this.checkTokenValidity();
-  }
-
-  private getToken(): string | null {
-    return localStorage.getItem('jwtToken');
-  }
-
-  private checkTokenValidity(): void {
-    const token = this.getToken();
-    if (token) {
-      this.validateToken().subscribe(isValid => {
-        this.isLoggedInSubject.next(isValid);
-        if (!isValid) {
-          this.logout();
-        }
-      });
-    }
   }
 
   validateToken(): Observable<boolean> {
@@ -50,7 +34,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.authControllerService.loginUser({ username, password }, 'body').pipe(
+    return this.authControllerService.loginUser({username, password}, 'body').pipe(
       map(response => {
         if (response.jwt) {
           localStorage.setItem('jwtToken', response.jwt);
@@ -72,7 +56,23 @@ export class AuthService {
 
   isLoggedIn(): Observable<boolean> {
     let booleanObservable = this.isLoggedInSubject.asObservable();
-    booleanObservable.subscribe(value => console.log("is valid " + value))
+    booleanObservable.subscribe(value => console.log("is token valid: " + value))
     return booleanObservable;
+  }
+
+  private getToken(): string | null {
+    return localStorage.getItem('jwtToken');
+  }
+
+  private checkTokenValidity(): void {
+    const token = this.getToken();
+    if (token) {
+      this.validateToken().subscribe(isValid => {
+        this.isLoggedInSubject.next(isValid);
+        if (!isValid) {
+          this.logout();
+        }
+      });
+    }
   }
 }

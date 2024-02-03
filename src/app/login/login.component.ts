@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {LoginBody} from '../api/model/loginBody';
+import {LoginBody} from '../api';
 import {Router} from '@angular/router';
-import {AuthenticationControllerService} from "../api";
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-login',
@@ -13,15 +13,14 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthenticationControllerService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   onLogin(): void {
     const loginData: LoginBody = {username: this.username, password: this.password};
-    this.authService.loginUser(loginData).subscribe({
+    this.authService.login(loginData.username, loginData.password).subscribe({
       next: (response: any) => {
-        localStorage.setItem('jwtToken', response.jwt);
-        this.router.navigate(['/products']);
+        this.router.navigate(['/products'])
       },
       error: (error: any) => {
         console.error('Login failed', error);
