@@ -1,4 +1,4 @@
-<form [formGroup]="registrationForm" (ngSubmit)="register()">
+<form *ngIf="!registrationSuccess; else registrationComplete" (ngSubmit)="register()" [formGroup]="registrationForm">
   <!-- TODO: Add validation messages -->
   <div>
     <label for="username">Username</label>
@@ -22,4 +22,8 @@
   </div>
   <button type="submit" [disabled]="!registrationForm.valid">Register</button>
 </form>
+
+<ng-template #registrationComplete>
+  <div [innerHTML]="registrationMessage"></div>
+</ng-template>
 

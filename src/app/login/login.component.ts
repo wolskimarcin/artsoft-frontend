@@ -20,8 +20,7 @@ export class LoginComponent {
     const loginData: LoginBody = {username: this.username, password: this.password};
     this.authService.loginUser(loginData).subscribe({
       next: (response: any) => {
-        console.log('Login successful', response);
-        // TODO:  store the JWT token (if present in the response) and update the UI or redirect.
+        localStorage.setItem('jwtToken', response.jwt);
         this.router.navigate(['/products']);
       },
       error: (error: any) => {

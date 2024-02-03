@@ -13,7 +13,7 @@
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
+         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext
         }       from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
@@ -100,7 +100,7 @@ export class AuthenticationControllerService {
     }
 
     /**
-     * @param email 
+     * @param email
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -145,16 +145,7 @@ export class AuthenticationControllerService {
         }
 
 
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
+        let responseType_ = 'json';
 
         let localVarPath = `/auth/forgot`;
         return this.httpClient.request<string>('post', `${this.configuration.basePath}${localVarPath}`,
@@ -206,16 +197,7 @@ export class AuthenticationControllerService {
         }
 
 
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
+        let responseType_ = 'json';
 
         let localVarPath = `/auth/me`;
         return this.httpClient.request<LocalUser>('get', `${this.configuration.basePath}${localVarPath}`,
@@ -231,7 +213,7 @@ export class AuthenticationControllerService {
     }
 
     /**
-     * @param loginBody 
+     * @param loginBody
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -279,16 +261,7 @@ export class AuthenticationControllerService {
             localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
         }
 
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
+        let responseType_ = 'json';
 
         let localVarPath = `/auth/login`;
         return this.httpClient.request<LoginResponse>('post', `${this.configuration.basePath}${localVarPath}`,
@@ -305,7 +278,7 @@ export class AuthenticationControllerService {
     }
 
     /**
-     * @param registrationBody 
+     * @param registrationBody
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -353,16 +326,7 @@ export class AuthenticationControllerService {
             localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
         }
 
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
+        let responseType_= 'json';
 
         let localVarPath = `/auth/register`;
         return this.httpClient.request<string>('post', `${this.configuration.basePath}${localVarPath}`,
@@ -379,7 +343,7 @@ export class AuthenticationControllerService {
     }
 
     /**
-     * @param passwordResetBody 
+     * @param passwordResetBody
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -453,7 +417,7 @@ export class AuthenticationControllerService {
     }
 
     /**
-     * @param token 
+     * @param token
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

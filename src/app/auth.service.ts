@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   private getToken(): string | null {
-    return localStorage.getItem('userToken');
+    return localStorage.getItem('jwtToken');
   }
 
   private checkTokenValidity(): void {
@@ -53,7 +53,7 @@ export class AuthService {
     return this.authControllerService.loginUser({ username, password }, 'body').pipe(
       map(response => {
         if (response.jwt) {
-          localStorage.setItem('userToken', response.jwt);
+          localStorage.setItem('jwtToken', response.jwt);
           this.isLoggedInSubject.next(true);
         }
         return response;
@@ -66,11 +66,13 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('userToken');
+    localStorage.removeItem('jwtToken');
     this.isLoggedInSubject.next(false);
   }
 
   isLoggedIn(): Observable<boolean> {
-    return this.isLoggedInSubject.asObservable();
+    let booleanObservable = this.isLoggedInSubject.asObservable();
+    booleanObservable.subscribe(value => console.log("is valid " + value))
+    return booleanObservable;
   }
 }
