@@ -21,7 +21,11 @@ export class ProductsComponent implements OnInit {
     productsObservable.subscribe({
       next: (data) => {
         console.log('Received product data:', data); // TODO: Remove logs
-        this.products = data;
+        this.products = data.map(product => ({
+          ...product,
+          // TODO: TEMPORARY SOLUTION! Integrate with amazon s3 for storing images
+          imageUrl: `https://picsum.photos/seed/${this.simpleHash(product.name)}/200/300`
+        }));
       },
       error: (error) => {
         console.error('Error fetching products:', error);
@@ -34,6 +38,18 @@ export class ProductsComponent implements OnInit {
         console.log('Product fetching process completed.');
       }
     });
+  }
+
+  private simpleHash(input: string | undefined): number {
+    if (input == null) return 1;
+
+    let hash = 0;
+    for (let i = 0; i < input.length; i++) {
+      const char = input.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
   }
 
 }

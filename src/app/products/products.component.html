@@ -1,5 +1,12 @@
-<div *ngFor="let product of products">
-  <h2>{{ product.name }}</h2>
-  <p>{{ product.shortDescription }}</p>
-  <!-- TODO: Add more product details -->
+<div class="products-grid">
+  <div *ngFor="let product of products" class="product-card">
+    <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="{{ product.name }}" class="product-image">
+    <div class="product-details">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.shortDescription }}</p>
+      <p *ngIf="product.price" class="product-price">${{ product.price }}</p>
+      <!--<p *ngIf="product.inStock" class="in-stock">In Stock</p>
+      <p *ngIf="!product.inStock" class="out-of-stock">Out of Stock</p>-->
+    </div>
+  </div>
 </div>

@@ -9,15 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Inventory } from './inventory';
+import {Inventory} from './inventory';
 
 
-export interface Product { 
-    id?: number;
-    name?: string;
-    shortDescription?: string;
-    longDescription?: string;
-    price?: number;
-    inventory?: Inventory;
+export interface Product {
+  id?: number;
+  name?: string;
+  shortDescription?: string;
+  longDescription?: string;
+  price?: number;
+  inventory?: Inventory;
+  imageUrl: string;
 }
 
