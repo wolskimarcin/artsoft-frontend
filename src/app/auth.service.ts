@@ -9,7 +9,7 @@ import {LoginBody} from "./api/models/login-body";
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly userProfileUrl = 'http://localhost:8080/auth/me';
+  private readonly userProfileUrl = 'http://artsoft.us-east-1.elasticbeanstalk.com/auth/me';
   private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private authControllerService: AuthenticationControllerService, private http: HttpClient) {
