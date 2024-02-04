@@ -14,10 +14,10 @@ info:
 servers:
 - url: http://artsoft.us-east-1.elasticbeanstalk.com
   description: Server URL in Development environment
-- url: https://busher-api.com
+- url: http://artsoft.us-east-1.elasticbeanstalk.com
   description: Server URL in Production environment
 security:
-- BearerAuthentication: []
+- Bearer Authentication: []
 paths:
   /user/{userId}/address:
     get:
@@ -333,12 +333,6 @@ components:
         totalElements:
           type: integer
           format: int64
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
-        first:
-          type: boolean
-        last:
-          type: boolean
         size:
           type: integer
           format: int32
@@ -354,26 +348,32 @@ components:
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
         empty:
           type: boolean
     PageableObject:
       type: object
       properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/SortObject'
         pageNumber:
           type: integer
           format: int32
         pageSize:
           type: integer
           format: int32
-        unpaged:
-          type: boolean
         paged:
           type: boolean
-        offset:
-          type: integer
-          format: int64
-        sort:
-          $ref: '#/components/schemas/SortObject'
+        unpaged:
+          type: boolean
     Product:
       type: object
       properties:
@@ -394,11 +394,11 @@ components:
     SortObject:
       type: object
       properties:
+        empty:
+          type: boolean
         sorted:
           type: boolean
         unsorted:
-          type: boolean
-        empty:
           type: boolean
     GrantedAuthority:
       type: object
@@ -421,6 +421,8 @@ components:
           type: string
         isEmailVerified:
           type: boolean
+        enabled:
+          type: boolean
         authorities:
           type: array
           items:
@@ -430,8 +432,6 @@ components:
         accountNonLocked:
           type: boolean
         credentialsNonExpired:
-          type: boolean
-        enabled:
           type: boolean
     WebOrder:
       type: object
@@ -459,7 +459,7 @@ components:
           type: integer
           format: int32
   securitySchemes:
-    BearerAuthentication:
+    Bearer Authentication:
       type: http
       scheme: bearer
       bearerFormat: JWT
