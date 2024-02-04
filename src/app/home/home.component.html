@@ -1,30 +1,156 @@
 <div class="home-container">
-  <section class="hero">
-    <h1>Welcome to Artsoft!</h1>
-    <p>Discover our wide range of products and enjoy seamless online shopping with us.</p>
-    <i class="bi bi-shop" aria-hidden="true"></i>
-  </section>
+  <mat-card class="welcome-card">
+    <mat-card-header>
+      <mat-card-title>About Artsoft</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Artsoft is an e-commerce platform designed to offer a seamless shopping experience utilizing various backend
+        and frontend technologies.</p>
+    </mat-card-content>
+  </mat-card>
 
-  <section class="features">
-    <div class="feature-cards">
-      <div class="feature-card">
-        <i class="bi bi-search" aria-hidden="true"></i>
-        <p>Browse products in various categories</p>
-      </div>
-      <div class="feature-card">
-        <i class="bi bi-journal-check" aria-hidden="true"></i>
-        <p>Manage your orders easily</p>
-      </div>
-      <div class="feature-card">
-        <i class="bi bi-cart-fill" aria-hidden="true"></i>
-        <p>Access your shopping cart from any device</p>
-      </div>
-    </div>
-  </section>
+  <mat-card class="section-card">
+    <mat-card-title>
+      <mat-icon>link</mat-icon>
+      Find Project on GitHub
+    </mat-card-title>
+    <mat-card-content>
+      <a href="https://github.com/wolskimarcin/artsoft-frontend" target="_blank" rel="noopener">
+        <mat-icon fontSet="fa" fontIcon="fa-github"></mat-icon>
+        Artsoft Frontend Repository
+      </a>
+    </mat-card-content>
+    <mat-card-content>
+      <a href="https://github.com/wolskimarcin/artsoft-backend" target="_blank" rel="noopener">
+        <mat-icon fontSet="fa" fontIcon="fa-github"></mat-icon>
+        Artsoft Backend Repository
+      </a>
+    </mat-card-content>
+  </mat-card>
 
-  <section class="navigation-links">
-    <a routerLink="/products" class="btn">View Products</a>
-    <!--<a routerLink="/login" class="btn">Login</a>-->
-    <!--<a routerLink="/register" class="btn">Register</a>-->
-  </section>
+  <mat-card class="section-card">
+    <mat-card-title>
+      <mat-icon>featured_play_list</mat-icon>
+      Project Functionalities
+    </mat-card-title>
+    <mat-card-content>
+      <ul>
+        <li>
+          <mat-icon>account_circle</mat-icon>
+          Create new account verified via email
+        </li>
+        <li>
+          <mat-icon>login</mat-icon>
+          Sign in to your account
+        </li>
+        <li>
+          <mat-icon>search</mat-icon>
+          Browse products
+        </li>
+        <li>
+          <mat-icon>shopping_cart</mat-icon>
+          Shopping cart
+        </li>
+        <li>
+          <mat-icon>mail_outline</mat-icon>
+          Resend verification link
+        </li>
+        <li>
+          <mat-icon>pages</mat-icon>
+          Explore products pagination
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="section-card">
+    <mat-card-title>
+      <mat-icon>code</mat-icon>
+      Frontend Technologies
+    </mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          <mat-icon>web</mat-icon>
+          Angular
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>keyboard</mat-icon>
+          TypeScript
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>palette</mat-icon>
+          Angular Material
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>layers</mat-icon>
+          HTML5 & CSS3
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="section-card">
+    <mat-card-title>
+      <mat-icon>storage</mat-icon>
+      Backend Technologies
+    </mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          <mat-icon>coffee</mat-icon>
+          Java 17
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>cloud</mat-icon>
+          Spring Boot
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>storage</mat-icon>
+          PostgreSQL
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>storage</mat-icon>
+          JPA/Hibernate
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>cloud_queue</mat-icon>
+          Docker
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>integration_instructions</mat-icon>
+          OpenAPI & Swagger
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>vpn_key</mat-icon>
+          JWT
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>code</mat-icon>
+          Lombok
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>build</mat-icon>
+          Maven
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>check_circle_outline</mat-icon>
+          JUnit
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>extension</mat-icon>
+          Mockito
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>security</mat-icon>
+          Spring Security
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>email</mat-icon>
+          smtp4dev
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+
+  </mat-card>
 </div>

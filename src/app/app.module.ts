@@ -17,6 +17,8 @@ import {MatIconModule} from "@angular/material/icon";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatList, MatListItem} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -38,6 +40,12 @@ import {MatInput} from "@angular/material/input";
     MatIconModule,
     MatFormField,
     MatInput,
+    MatCard,
+    MatCardHeader,
+    MatCardContent,
+    MatCardTitle,
+    MatList,
+    MatListItem,
   ],
   providers: [
     {
