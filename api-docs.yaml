@@ -12,12 +12,14 @@ info:
     url: https://choosealicense.com/licenses/mit/
   version: "1.0"
 servers:
-- url: http://artsoft.us-east-1.elasticbeanstalk.com
+- url: http://localhost:8080
+#- url: http://artsoft.us-east-1.elasticbeanstalk.com
   description: Server URL in Development environment
-- url: http://artsoft.us-east-1.elasticbeanstalk.com
+#- url: http://artsoft.us-east-1.elasticbeanstalk.com
+- url: http://localhost:8080
   description: Server URL in Production environment
 security:
-- Bearer Authentication: []
+- BearerAuthentication: []
 paths:
   /user/{userId}/address:
     get:
@@ -459,7 +461,7 @@ components:
           type: integer
           format: int32
   securitySchemes:
-    Bearer Authentication:
+    BearerAuthentication:
       type: http
       scheme: bearer
       bearerFormat: JWT

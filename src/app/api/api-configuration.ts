@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiConfiguration {
-  rootUrl: string = 'http://artsoft.us-east-1.elasticbeanstalk.com';
+  rootUrl: string = 'http://localhost:8080';
 }
 
 /**
