@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductControllerService} from "../api/services/product-controller.service";
-import {Product} from "../api/models/product";
+import {ProductDetails} from "../models/product-details.model";
 import {GetProducts$Params} from "../api/fn/product-controller/get-products";
 import {PageProduct} from "../api/models/page-product";
 import {ActivatedRoute} from "@angular/router";
+import {GetProductInventory$Params} from "../api/fn/product-controller/get-product-inventory";
 
 @Component({
   selector: 'app-products',
@@ -11,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products: Product[] = [];
+  products: ProductDetails[] = [];
   currentPage: number = 0;
   pageSize: number = 10;
   totalElements: number = 0;
@@ -41,11 +42,24 @@ export class ProductsComponent implements OnInit {
 
     this.productService.getProducts(params).subscribe({
       next: (pageData: PageProduct) => {
-        this.products = pageData.content || [];
+        if (pageData.content == null) return
+        this.products = pageData.content.map(product => ({ ...product, inventoryQuantity: undefined }));
         this.currentPage = pageData.number || 0;
         this.pageSize = pageData.size || 10;
         this.totalElements = pageData.totalElements || 0;
         this.totalPages = pageData.totalPages || 0;
+
+        this.products.forEach((product, index) => {
+          this.productService.getProductInventory(<GetProductInventory$Params>{id: product.id}).subscribe({
+            next: (inventory) => {
+              this.products[index].inventoryQuantity = inventory.quantity;
+            },
+            error: (error) => {
+              console.error(`Error fetching inventory for product ${product.id}:`, error);
+              this.products[index].inventoryQuantity = 0;
+            }
+          });
+        });
       },
       error: (error) => console.error('Error fetching products:', error)
     });

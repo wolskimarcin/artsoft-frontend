@@ -18,6 +18,12 @@
       <h2>{{ product.name }}</h2>
       <p>{{ product.shortDescription }}</p>
       <p *ngIf="product.price" class="product-price">${{ product.price }}</p>
+      <p *ngIf="product.inventoryQuantity !== undefined" class="product-inventory">
+        Quantity in Stock: {{ product.inventoryQuantity }}
+      </p>
+      <p *ngIf="product.inventoryQuantity === undefined" class="product-inventory-loading">
+        Inventory loading...
+      </p>
     </div>
   </div>
 </div>

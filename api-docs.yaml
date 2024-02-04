@@ -13,9 +13,7 @@ info:
   version: "1.0"
 servers:
 - url: http://localhost:8080
-#- url: http://artsoft.us-east-1.elasticbeanstalk.com
   description: Server URL in Development environment
-#- url: http://artsoft.us-east-1.elasticbeanstalk.com
 - url: http://localhost:8080
   description: Server URL in Production environment
 security:
@@ -219,6 +217,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PageProduct'
+  /product/{id}/inventory:
+    get:
+      tags:
+      - product-controller
+      operationId: getProductInventory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
   /order:
     get:
       tags:
@@ -335,6 +352,8 @@ components:
         totalElements:
           type: integer
           format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         size:
           type: integer
           format: int32
@@ -347,25 +366,18 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        numberOfElements:
-          type: integer
-          format: int32
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
           type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
         empty:
           type: boolean
     PageableObject:
       type: object
       properties:
-        offset:
-          type: integer
-          format: int64
-        sort:
-          $ref: '#/components/schemas/SortObject'
         pageNumber:
           type: integer
           format: int32
@@ -376,6 +388,11 @@ components:
           type: boolean
         unpaged:
           type: boolean
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/SortObject'
     Product:
       type: object
       properties:
@@ -396,11 +413,11 @@ components:
     SortObject:
       type: object
       properties:
-        empty:
-          type: boolean
         sorted:
           type: boolean
         unsorted:
+          type: boolean
+        empty:
           type: boolean
     GrantedAuthority:
       type: object
@@ -423,8 +440,6 @@ components:
           type: string
         isEmailVerified:
           type: boolean
-        enabled:
-          type: boolean
         authorities:
           type: array
           items:
@@ -434,6 +449,8 @@ components:
         accountNonLocked:
           type: boolean
         credentialsNonExpired:
+          type: boolean
+        enabled:
           type: boolean
     WebOrder:
       type: object

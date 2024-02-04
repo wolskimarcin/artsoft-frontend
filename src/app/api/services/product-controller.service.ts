@@ -9,8 +9,11 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { getProductInventory } from '../fn/product-controller/get-product-inventory';
+import { GetProductInventory$Params } from '../fn/product-controller/get-product-inventory';
 import { getProducts } from '../fn/product-controller/get-products';
 import { GetProducts$Params } from '../fn/product-controller/get-products';
+import { Inventory } from '../models/inventory';
 import { PageProduct } from '../models/page-product';
 
 @Injectable({ providedIn: 'root' })
@@ -41,6 +44,31 @@ export class ProductControllerService extends BaseService {
   getProducts(params?: GetProducts$Params, context?: HttpContext): Observable<PageProduct> {
     return this.getProducts$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageProduct>): PageProduct => r.body)
+    );
+  }
+
+  /** Path part for operation `getProductInventory()` */
+  static readonly GetProductInventoryPath = '/product/{id}/inventory';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getProductInventory()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProductInventory$Response(params: GetProductInventory$Params, context?: HttpContext): Observable<StrictHttpResponse<Inventory>> {
+    return getProductInventory(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getProductInventory$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getProductInventory(params: GetProductInventory$Params, context?: HttpContext): Observable<Inventory> {
+    return this.getProductInventory$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Inventory>): Inventory => r.body)
     );
   }
 
