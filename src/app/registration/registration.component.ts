@@ -37,10 +37,12 @@ export class RegistrationComponent implements OnInit {
         next: (response) => {
           console.log('Registration successful', response);
           this.registrationSuccess = true;
-          this.registrationMessage =
+          this.registrationMessage = "Email verification is temporarily disabled until AWS completes DNS domain verification. " +
+            "Email is verified by default, please proceed to login."
+          /*this.registrationMessage =
             `Almost there! 🌟 We've sent an email to ${this.userEmail} with a link to activate your account.
               Please check your inbox (and spam folder, just in case) to complete your registration.
-              Can't find the email? <a href="#" (click)="resendActivationLink()">Resend Activation Link</a>.`;
+              Can't find the email? <a href="#" (click)="resendActivationLink()">Resend Activation Link</a>.`;*/
         },
         error: (error) => {
           console.error('Registration failed', error);
