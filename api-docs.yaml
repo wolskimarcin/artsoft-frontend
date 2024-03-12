@@ -64,6 +64,67 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Address'
+  /cart/item/{itemId}:
+    put:
+      tags:
+      - cart-controller
+      operationId: updateCartItem
+      parameters:
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartItem'
+    delete:
+      tags:
+      - cart-controller
+      operationId: removeCartItem
+      parameters:
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /cart/add:
+    post:
+      tags:
+      - cart-controller
+      operationId: addProductToCart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartItem'
   /auth/verify:
     post:
       tags:
@@ -250,6 +311,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/WebOrder'
+  /cart:
+    get:
+      tags:
+      - cart-controller
+      operationId: getCurrentCart
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
   /auth/me:
     get:
       tags:
@@ -278,6 +351,27 @@ components:
           type: string
         country:
           type: string
+    CartItemRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
+    CartItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        productId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
     PasswordResetBody:
       required:
       - password
@@ -354,6 +448,10 @@ components:
           format: int64
         pageable:
           $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
         size:
           type: integer
           format: int32
@@ -366,10 +464,6 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        first:
-          type: boolean
-        last:
-          type: boolean
         numberOfElements:
           type: integer
           format: int32
@@ -477,6 +571,17 @@ components:
         quantity:
           type: integer
           format: int32
+    Cart:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        items:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
   securitySchemes:
     BearerAuthentication:
       type: http

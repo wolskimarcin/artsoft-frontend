@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { UserControllerService } from './services/user-controller.service';
+import { CartControllerService } from './services/cart-controller.service';
 import { AuthenticationControllerService } from './services/authentication-controller.service';
 import { ProductControllerService } from './services/product-controller.service';
 import { OrderControllerService } from './services/order-controller.service';
@@ -18,6 +19,7 @@ import { OrderControllerService } from './services/order-controller.service';
   declarations: [],
   providers: [
     UserControllerService,
+    CartControllerService,
     AuthenticationControllerService,
     ProductControllerService,
     OrderControllerService,
