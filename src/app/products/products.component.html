@@ -24,6 +24,7 @@
       <p *ngIf="product.inventoryQuantity === undefined" class="product-inventory-loading">
         Inventory loading...
       </p>
+      <button mat-button (click)="addToCart(product)">Add to Cart</button>
     </div>
   </div>
 </div>

@@ -5,6 +5,9 @@ import {GetProducts$Params} from "../api/fn/product-controller/get-products";
 import {PageProduct} from "../api/models/page-product";
 import {ActivatedRoute} from "@angular/router";
 import {GetProductInventory$Params} from "../api/fn/product-controller/get-product-inventory";
+import {CartControllerService} from "../api/services/cart-controller.service";
+import {AddProductToCart$Params} from "../api/fn/cart-controller/add-product-to-cart";
+import {CartItemRequest} from "../api/models/cart-item-request";
 
 @Component({
   selector: 'app-products',
@@ -20,8 +23,10 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductControllerService,
+    private cartService: CartControllerService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -30,6 +35,25 @@ export class ProductsComponent implements OnInit {
       const size = parseInt(params['size'] || '10', 10);
 
       this.fetchProducts(page, size, search);
+    });
+  }
+
+  addToCart(product: ProductDetails): void {
+    const cartItemRequest: CartItemRequest = {
+      productId: product.id,
+      quantity: 1
+    };
+
+    const params: AddProductToCart$Params = {
+      body: cartItemRequest
+    }
+    this.cartService.addProductToCart(params).subscribe({
+      next: (response) => {
+        console.log('Product added to cart:', response);
+      },
+      error: (error) => {
+        console.log('Failed to add product to cart:', error);
+      }
     });
   }
 
@@ -43,7 +67,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getProducts(params).subscribe({
       next: (pageData: PageProduct) => {
         if (pageData.content == null) return
-        this.products = pageData.content.map(product => ({ ...product, inventoryQuantity: undefined }));
+        this.products = pageData.content.map(product => ({...product, inventoryQuantity: undefined}));
         this.currentPage = pageData.number || 0;
         this.pageSize = pageData.size || 10;
         this.totalElements = pageData.totalElements || 0;
