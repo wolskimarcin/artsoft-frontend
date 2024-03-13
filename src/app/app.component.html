@@ -25,11 +25,13 @@
 
     <span class="flex-spacer"></span>
 
-    <div class="shopping-cart">
-      <mat-icon>shopping_cart</mat-icon>
-      <span>{{ itemCount }}</span> /
-      <span>${{ totalPrice.toFixed(2) }}</span>
-    </div>
+    <a mat-button routerLink="/cart">
+      <div class="shopping-cart">
+        <mat-icon>shopping_cart</mat-icon>
+        <span>{{ itemCount }}</span> /
+        <span>${{ totalPrice.toFixed(2) }}</span>
+      </div>
+    </a>
   </mat-toolbar>
 </header>
 
