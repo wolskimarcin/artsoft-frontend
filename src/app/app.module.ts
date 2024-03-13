@@ -19,6 +19,18 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatList, MatListItem} from "@angular/material/list";
+import {CartComponent} from "./cart/cart.component";
+import {ConfirmationDialogComponent} from "./confirmation-dialog/confirmation-dialog.component";
+import {
+  MatCell, MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef,
+  MatRow, MatRowDef,
+  MatTable
+} from "@angular/material/table";
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -27,6 +39,8 @@ import {MatList, MatListItem} from "@angular/material/list";
     ProductsComponent,
     UserProfileComponent,
     RegistrationComponent,
+    CartComponent,
+    ConfirmationDialogComponent,
     HomeComponent
   ],
   imports: [
@@ -46,6 +60,20 @@ import {MatList, MatListItem} from "@angular/material/list";
     MatCardTitle,
     MatList,
     MatListItem,
+    MatTable,
+    MatHeaderCell,
+    MatCell,
+    MatRow,
+    MatHeaderRow,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatHeaderRowDef,
+    MatRowDef,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
   ],
   providers: [
     {
