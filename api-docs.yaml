@@ -17,7 +17,7 @@ servers:
 - url: http://localhost:8080
   description: Server URL in Production environment
 security:
-- BearerAuthentication: []
+- Bearer Authentication: []
 paths:
   /user/{userId}/address:
     get:
@@ -278,6 +278,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PageProduct'
+  /product/{id}:
+    get:
+      tags:
+      - product-controller
+      operationId: getProductDetails
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
   /product/{id}/inventory:
     get:
       tags:
@@ -582,8 +601,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CartItem'
+        user:
+          $ref: '#/components/schemas/LocalUser'
   securitySchemes:
-    BearerAuthentication:
+    Bearer Authentication:
       type: http
       scheme: bearer
       bearerFormat: JWT
