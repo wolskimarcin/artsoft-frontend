@@ -30,7 +30,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 `npx ng-openapi-gen`
 
 ## Deploy to GitHub Pages
-1. `ng build --output-path docs --base-href /your_project_name/`
+1. `ng build --output-path docs --base-href /artsoft-frontend/`
 2. When the build is complete, make a copy of docs/index.html and name it docs/404.html
 3. Commit your changes and push
 4. On the GitHub project page, go to Settings and select the Pages option from the left sidebar to configure the site to publish from the docs folder.
