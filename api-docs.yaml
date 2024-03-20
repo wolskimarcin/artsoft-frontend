@@ -342,6 +342,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
+  /cart/summary:
+    get:
+      tags:
+      - cart-controller
+      operationId: getCartSummary
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartSummary'
   /auth/me:
     get:
       tags:
@@ -603,6 +615,15 @@ components:
             $ref: '#/components/schemas/CartItem'
         user:
           $ref: '#/components/schemas/LocalUser'
+    CartSummary:
+      type: object
+      properties:
+        itemCount:
+          type: integer
+          format: int32
+        totalCost:
+          type: number
+          format: double
   securitySchemes:
     Bearer Authentication:
       type: http

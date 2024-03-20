@@ -1,4 +1,4 @@
-<div>
+<div class="table-container">
   <table mat-table [dataSource]="cartItems" class="mat-elevation-z1">
 
     <!-- Product ID Column -->
@@ -34,4 +34,15 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <div class="summary-block">
+    <div class="summary-info">
+      <div>Total Items: {{totalItemCount}}</div>
+      <div>Total Price: ${{totalPrice | number:'1.2-2'}}</div>
+    </div>
+    <button mat-raised-button color="primary"
+    >Go to Order Summary</button>
+    <!-- TODO:       (click)="navigateToOrderSummary()"-->
+  </div>
+
 </div>

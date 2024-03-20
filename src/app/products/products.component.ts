@@ -8,6 +8,7 @@ import {GetProductInventory$Params} from "../api/fn/product-controller/get-produ
 import {CartControllerService} from "../api/services/cart-controller.service";
 import {AddProductToCart$Params} from "../api/fn/cart-controller/add-product-to-cart";
 import {CartItemRequest} from "../api/models/cart-item-request";
+import {SharedService} from "../shared/shared.service";
 
 @Component({
   selector: 'app-products',
@@ -23,6 +24,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductControllerService,
+    private sharedService: SharedService,
     private cartService: CartControllerService,
     private route: ActivatedRoute
   ) {
@@ -49,6 +51,7 @@ export class ProductsComponent implements OnInit {
     }
     this.cartService.addProductToCart(params).subscribe({
       next: (response) => {
+        this.sharedService.notifyCartUpdate();
         console.log('Product added to cart:', response);
       },
       error: (error) => {

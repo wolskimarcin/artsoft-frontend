@@ -13,6 +13,9 @@ import { addProductToCart } from '../fn/cart-controller/add-product-to-cart';
 import { AddProductToCart$Params } from '../fn/cart-controller/add-product-to-cart';
 import { Cart } from '../models/cart';
 import { CartItem } from '../models/cart-item';
+import { CartSummary } from '../models/cart-summary';
+import { getCartSummary } from '../fn/cart-controller/get-cart-summary';
+import { GetCartSummary$Params } from '../fn/cart-controller/get-cart-summary';
 import { getCurrentCart } from '../fn/cart-controller/get-current-cart';
 import { GetCurrentCart$Params } from '../fn/cart-controller/get-current-cart';
 import { removeCartItem } from '../fn/cart-controller/remove-cart-item';
@@ -127,6 +130,31 @@ export class CartControllerService extends BaseService {
   getCurrentCart(params?: GetCurrentCart$Params, context?: HttpContext): Observable<Cart> {
     return this.getCurrentCart$Response(params, context).pipe(
       map((r: StrictHttpResponse<Cart>): Cart => r.body)
+    );
+  }
+
+  /** Path part for operation `getCartSummary()` */
+  static readonly GetCartSummaryPath = '/cart/summary';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getCartSummary()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCartSummary$Response(params?: GetCartSummary$Params, context?: HttpContext): Observable<StrictHttpResponse<CartSummary>> {
+    return getCartSummary(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getCartSummary$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCartSummary(params?: GetCartSummary$Params, context?: HttpContext): Observable<CartSummary> {
+    return this.getCartSummary$Response(params, context).pipe(
+      map((r: StrictHttpResponse<CartSummary>): CartSummary => r.body)
     );
   }
 

@@ -15,6 +15,7 @@ import {CartItem} from "../api/models/cart-item";
 import {CartItemRequest} from "../api/models/cart-item-request";
 import {UpdateCartItem$Params} from "../api/fn/cart-controller/update-cart-item";
 import {RemoveCartItem$Params} from "../api/fn/cart-controller/remove-cart-item";
+import {SharedService} from "../shared/shared.service";
 
 @Component({
   selector: 'app-cart',
@@ -22,12 +23,15 @@ import {RemoveCartItem$Params} from "../api/fn/cart-controller/remove-cart-item"
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  totalItemCount: number = 0
+  totalPrice: number = 0
   cartItems: Array<CartItemDetails> = [];
   displayedColumns: string[] = ['name', 'quantity', 'changeQuantity', 'remove'];
 
   constructor(
     private cartService: CartControllerService,
     private productService: ProductControllerService,
+    private sharedService: SharedService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
@@ -35,6 +39,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCartItems();
+    this.loadCartSummary();
   }
 
   getProductNameById(productId: number | undefined): Observable<string> {
@@ -74,6 +79,19 @@ export class CartComponent implements OnInit {
     });
   }
 
+  loadCartSummary(): void {
+    this.cartService.getCartSummary().subscribe({
+      next: (cartSummary) => {
+        console.log(cartSummary);
+        this.totalItemCount = cartSummary.itemCount ?? 0
+        this.totalPrice = cartSummary.totalCost ?? 0
+        this.sharedService.notifyCartUpdate();
+      },
+      error: () => {
+        this.showSnackBar('Error loading cart summary');
+      }
+    });
+  }
 
   changeQuantity(item: CartItem): void {
     if (item.quantity! < 0) {
@@ -91,6 +109,7 @@ export class CartComponent implements OnInit {
     }
     this.cartService.updateCartItem(params).subscribe({
       next: () => {
+        this.loadCartSummary()
       },
       error: () => {
       }
@@ -127,6 +146,7 @@ export class CartComponent implements OnInit {
         next: () => {
           this.showSnackBar('Item removed');
           this.loadCartItems();
+          this.loadCartSummary();
         },
         error: () => {
           this.showSnackBar('Error removing item');

@@ -23,7 +23,7 @@ import {CartComponent} from "./cart/cart.component";
 import {ConfirmationDialogComponent} from "./confirmation-dialog/confirmation-dialog.component";
 import {
   MatCell, MatCellDef,
-  MatColumnDef,
+  MatColumnDef, MatFooterCell, MatFooterCellDef, MatFooterRow, MatFooterRowDef,
   MatHeaderCell,
   MatHeaderCellDef,
   MatHeaderRow, MatHeaderRowDef,
@@ -74,6 +74,10 @@ import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
+    MatFooterCell,
+    MatFooterRow,
+    MatFooterCellDef,
+    MatFooterRowDef,
   ],
   providers: [
     {
