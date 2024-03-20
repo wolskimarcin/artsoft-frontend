@@ -1,6 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export { Address } from './models/address';
+export { Cart } from './models/cart';
+export { CartItem } from './models/cart-item';
+export { CartItemRequest } from './models/cart-item-request';
+export { CartSummary } from './models/cart-summary';
 export { GrantedAuthority } from './models/granted-authority';
 export { Inventory } from './models/inventory';
 export { LocalUser } from './models/local-user';
