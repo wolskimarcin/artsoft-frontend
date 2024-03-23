@@ -17,7 +17,7 @@ import {MatIconModule} from "@angular/material/icon";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatCard, MatCardContent, MatCardHeader, MatCardModule, MatCardTitle} from "@angular/material/card";
 import {MatList, MatListItem} from "@angular/material/list";
 import {CartComponent} from "./cart/cart.component";
 import {ConfirmationDialogComponent} from "./confirmation-dialog/confirmation-dialog.component";
@@ -31,12 +31,15 @@ import {
   MatTable
 } from "@angular/material/table";
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ProductComponent} from "./product/product.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProductsComponent,
+    ProductComponent,
     UserProfileComponent,
     RegistrationComponent,
     CartComponent,
@@ -54,6 +57,9 @@ import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from
     MatIconModule,
     MatFormField,
     MatInput,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
     MatCard,
     MatCardHeader,
     MatCardContent,
