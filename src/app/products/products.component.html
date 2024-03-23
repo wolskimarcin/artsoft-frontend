@@ -13,7 +13,7 @@
 </div>
 
 <div class="products-grid">
-  <div *ngFor="let product of products" class="product-card">
+  <div *ngFor="let product of products" class="product-card" (click)="navigateToProductPage(product.id!)">
     <div class="product-details">
       <h2>{{ product.name }}</h2>
       <p>{{ product.shortDescription }}</p>
