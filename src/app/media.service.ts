@@ -38,4 +38,27 @@ export class MediaService {
       })
     );
   }
+
+  public searchImages(query: string, size: ImageSize, count: number): Observable<string[]> {
+    const apiUrl = `${this.baseUrl}/search/photos?query=${encodeURIComponent(query)}&client_id=${this.accessKey}&per_page=${count}`;
+
+    return this.http.get<any>(apiUrl).pipe(
+      map(response => {
+        return response.results.map((item: any) => {
+          switch (size) {
+            case ImageSize.Small:
+              return item.urls.small || item.urls.thumb;
+            case ImageSize.Regular:
+            default:
+              return item.urls.regular;
+          }
+        });
+      }),
+      catchError(error => {
+        console.error('Error fetching images:', error);
+        return of(['assets/no-image-available.svg']);
+      })
+    );
+  }
+
 }

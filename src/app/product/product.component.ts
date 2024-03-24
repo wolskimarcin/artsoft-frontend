@@ -13,6 +13,7 @@ import {ImageSize, MediaService} from "../media.service";
 export class ProductComponent implements OnInit {
   productId: string | null = null;
   product: ProductDetails | undefined;
+  mainImageUrl: string | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +23,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProduct();
+    this.mainImageUrl = this.product?.imageUrl || 'assets/no-image-available.svg';
   }
 
   private loadProduct(): void {
@@ -44,8 +46,18 @@ export class ProductComponent implements OnInit {
     if (!this.product.imageUrl) {
       this.mediaService.searchImage(product.name!, ImageSize.Regular).subscribe(url => {
         this.product!.imageUrl = url;
+        this.mainImageUrl = url;
       });
     }
+
+    if (!this.product.additionalImages || this.product.additionalImages.length === 0) {
+      this.mediaService.searchImages(this.product.name!, ImageSize.Regular, 6).subscribe(urls => {
+        this.product!.additionalImages = urls;
+      }, error => {
+        console.error('Failed to fetch additional images:', error);
+      });
+    }
+
     console.log('Product loaded:', product);
   }
 

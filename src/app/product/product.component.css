@@ -1,0 +1,28 @@
+.custom-card-image {
+  max-width: 100%;
+  height: inherit;
+  max-height: 200px;
+}
+
+.horizontal-gallery {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.image-container {
+  flex: none;
+  margin-right: 10px;
+}
+
+.gallery-image {
+  max-height: 100px;
+  object-fit: cover;
+}
+
+.main-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
