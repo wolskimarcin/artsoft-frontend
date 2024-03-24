@@ -3,6 +3,11 @@ import {catchError, map} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
+export enum ImageSize {
+  Small,
+  Regular,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,11 +19,19 @@ export class MediaService {
   constructor(private http: HttpClient) {
   }
 
-  public searchImage(query: string): Observable<string> {
+  public searchImage(query: string, size: ImageSize): Observable<string> {
     const apiUrl = `${this.baseUrl}/search/photos?query=${encodeURIComponent(query)}&client_id=${this.accessKey}`;
 
     return this.http.get<any>(apiUrl).pipe(
-      map(response => response.results[0]?.urls?.regular),
+      map(response => {
+        switch (size) {
+          case ImageSize.Small:
+            return response.results[0]?.urls?.small || response.results[0]?.urls?.thumb;
+          case ImageSize.Regular:
+          default:
+            return response.results[0]?.urls?.regular;
+        }
+      }),
       catchError(error => {
         console.error('Error fetching image:', error);
         return of('assets/no-image-available.svg');

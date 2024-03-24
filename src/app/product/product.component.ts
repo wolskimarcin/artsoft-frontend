@@ -3,7 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ProductControllerService} from "../api/services/product-controller.service";
 import {Product} from "../api/models/product";
 import {ProductDetails} from "../models/product-details.model";
-import {MediaService} from "../media.service";
+import {ImageSize, MediaService} from "../media.service";
 
 @Component({
   selector: 'app-product',
@@ -42,7 +42,7 @@ export class ProductComponent implements OnInit {
   private handleProductSuccess(product: Product): void {
     this.product = product;
     if (!this.product.imageUrl) {
-      this.mediaService.searchImage(product.name!).subscribe(url => {
+      this.mediaService.searchImage(product.name!, ImageSize.Regular).subscribe(url => {
         this.product!.imageUrl = url;
       });
     }
