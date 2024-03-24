@@ -9,6 +9,7 @@ import {CartControllerService} from "../api/services/cart-controller.service";
 import {AddProductToCart$Params} from "../api/fn/cart-controller/add-product-to-cart";
 import {CartItemRequest} from "../api/models/cart-item-request";
 import {SharedService} from "../shared/shared.service";
+import {MediaService} from "../media.service";
 
 @Component({
   selector: 'app-products',
@@ -21,13 +22,15 @@ export class ProductsComponent implements OnInit {
   pageSize: number = 10;
   totalElements: number = 0;
   totalPages: number = 0;
+  private imageQuality: string = '10';
 
   constructor(
     private productService: ProductControllerService,
     private sharedService: SharedService,
     private cartService: CartControllerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private mediaService: MediaService
   ) {
   }
 
@@ -81,6 +84,9 @@ export class ProductsComponent implements OnInit {
           this.productService.getProductInventory(<GetProductInventory$Params>{id: product.id}).subscribe({
             next: (inventory) => {
               this.products[index].inventoryQuantity = inventory.quantity;
+              this.mediaService.searchImage(product.name!).subscribe(url => {
+                this.products[index].imageUrl = `${url}?q=${this.imageQuality}`;
+              });
             },
             error: (error) => {
               console.error(`Error fetching inventory for product ${product.id}:`, error);
@@ -103,4 +109,5 @@ export class ProductsComponent implements OnInit {
   navigateToProductPage(productId: number): void {
     this.router.navigate(['/products', productId]);
   }
+
 }
