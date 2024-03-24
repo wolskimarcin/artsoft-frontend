@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProductControllerService} from "../api/services/product-controller.service";
 import {Product} from "../api/models/product";
+import {ProductDetails} from "../models/product-details.model";
+import {MediaService} from "../media.service";
 
 @Component({
   selector: 'app-product',
@@ -10,11 +12,12 @@ import {Product} from "../api/models/product";
 })
 export class ProductComponent implements OnInit {
   productId: string | null = null;
-  product: Product | undefined;
+  product: ProductDetails | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductControllerService
+    private productService: ProductControllerService,
+    private mediaService: MediaService
   ) {}
 
   ngOnInit(): void {
@@ -38,10 +41,16 @@ export class ProductComponent implements OnInit {
 
   private handleProductSuccess(product: Product): void {
     this.product = product;
+    if (!this.product.imageUrl) {
+      this.mediaService.searchImage(product.name!).subscribe(url => {
+        this.product!.imageUrl = url;
+      });
+    }
     console.log('Product loaded:', product);
   }
 
   private handleProductError(error: any): void {
     console.error('Error fetching product:', error);
   }
+
 }
