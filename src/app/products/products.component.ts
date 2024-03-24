@@ -3,7 +3,7 @@ import {ProductControllerService} from "../api/services/product-controller.servi
 import {ProductDetails} from "../models/product-details.model";
 import {GetProducts$Params} from "../api/fn/product-controller/get-products";
 import {PageProduct} from "../api/models/page-product";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {GetProductInventory$Params} from "../api/fn/product-controller/get-product-inventory";
 import {CartControllerService} from "../api/services/cart-controller.service";
 import {AddProductToCart$Params} from "../api/fn/cart-controller/add-product-to-cart";
@@ -26,7 +26,8 @@ export class ProductsComponent implements OnInit {
     private productService: ProductControllerService,
     private sharedService: SharedService,
     private cartService: CartControllerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -97,5 +98,9 @@ export class ProductsComponent implements OnInit {
       this.currentPage = page;
       this.fetchProducts(this.currentPage, this.pageSize);
     }
+  }
+
+  navigateToProductPage(productId: number): void {
+    this.router.navigate(['/products', productId]);
   }
 }
